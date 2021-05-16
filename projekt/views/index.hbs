@@ -1,0 +1,8 @@
+{{#if session.username}}
+	<br>
+	<a href="http://localhost:3000/images/">Vaše slike</a><br><br>
+	<a href="http://localhost:3000/images/dodaj" class="btn btn-primary btn-sm">Dodaj novo sliko</a>
+{{else}}
+<br><br>
+<h4>Za objavo in ogled vaših slik je potrebna prijava</h4>
+{{/if}}

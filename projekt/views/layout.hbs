@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="p-3 mb-10 bg-light text-dark">
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+	<script language="javascript" src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+  </head>
+  <body style="padding:0px;">
+	<div class="p-2 mb-10 bg-info text-white" style="border: 3px solid blue;">
+		<div class="row">
+			<div class="col-sm">
+				<h1 style="font-family:Helvetica; display:inline;">FOTOsinteza</h1><br>
+				<text style="font-family:papyrus">1526-ti najboljši identifikator rastlin na svetu</text><br>
+				<a type="button" href="http://localhost:3000/" class="btn btn-link">Domov</a><br>
+			</div>
+			{{#if session.username}}
+			<div class="col-auto" style="margin:10px">
+				Pozdravljeni, {{session.username}}!
+				<br>
+				<a href="http://localhost:3000/users/profile/" class="btn btn-link" style="float:right; margin-right:10px;">Vaš profil</a>
+				<br>
+				<a href="http://localhost:3000/users/logout/" type="button" class="btn btn-primary btn-sm" style="float:right;margin-right:25px;">Odjava</a>
+			</div>
+			{{else}}
+			<div class="col-auto" style="margin:10px">
+				<a type="button" href="http://localhost:3000/users/login/" style="float:right" class="btn btn-primary btn-sm">Prijava</a>
+				<br><br>
+				<a href="http://localhost:3000/users/register/" type="button" class="btn btn-primary btn-sm">Registracija</a>
+			</div>
+			{{/if}}
+		</div>
+	</div>
+	
+	<div class="p-3 mb-10 bg-light text-black">
+		{{{body}}}
+	</div>
+  </body>
+</html>

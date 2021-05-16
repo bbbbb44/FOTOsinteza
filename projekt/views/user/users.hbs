@@ -1,0 +1,14 @@
+<form action="/users" method="post">
+    <input type="text" name="username" placeholder="username" required>
+	<input type="text" name="gmail" placeholder="gmail" required>
+	<input type="text" name="password" placeholder="password" required>
+    <div class="tp">
+        <input type="submit" value="add">
+    </div>
+</form
+<br><br>
+{{#each users}}
+<b>Username: </b>{{username}}<br>
+<b>Gmail:</b>{{gmail}}<br>
+<b>Geslo:</b>{{password}}<br><br>
+{{/each}}

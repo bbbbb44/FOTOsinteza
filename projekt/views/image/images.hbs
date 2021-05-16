@@ -1,0 +1,14 @@
+<br>
+<a href="http://localhost:3000/images/dodaj" class="btn btn-primary btn-sm">Dodaj novo sliko</a>
+<br><br>
+<h2>Vaše slike:</h2>
+<br>
+{{#each images}}
+<b>Slika: </b><br>
+<a href="http://localhost:3000/images/{{_id}}">
+	<img src="/{{path}}" style="height:250px;width:auto"/>
+</a><br>
+<b>Datum objave: </b>{{datetime}}<br>
+<b>Opis: </b>{{description}}<br>
+<br><br>
+{{/each}}
