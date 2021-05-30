@@ -55,9 +55,10 @@ module.exports = {
         var image = new ImageModel({
 			description : req.body.description,
 			datetime : new Date(),
-			fk_location : -1,
+			lon : req.body.lon,
+			lat : req.body.lat, 
 			fk_user : req.session.userId,
-			fk_planet : 0,
+			fk_plant : 0,
 			path : 'images/'+req.file.filename,
         });
 

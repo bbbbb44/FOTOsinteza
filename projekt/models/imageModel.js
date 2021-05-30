@@ -4,7 +4,8 @@ var Schema   = mongoose.Schema;
 var imageSchema = new Schema({
 	'description' : String,
 	'datetime' : String,
-	'fk_location' : Number,
+	'lat' : Number,
+	'lon' : Number, 
 	'fk_user' : String,
 	'fk_plant' : String,
 	'path' : String
