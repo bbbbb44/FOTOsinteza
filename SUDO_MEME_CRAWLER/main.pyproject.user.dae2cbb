@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.15.0, 2021-06-05T00:05:06. -->
+<!-- Written by QtCreator 4.15.0, 2021-05-18T13:16:33. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{4282bac3-8579-40a8-80ca-2086f9b04634}</value>
+  <value type="QByteArray">{dae2cbb6-ffb9-49ba-aa88-8acc3d8bb16d}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -91,7 +91,7 @@
    <value type="QString" key="DeviceType">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{9c834429-d3e9-49e1-9a22-81cb4b6acaed}</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{c8fcc1d9-3e6d-4f27-bf8a-d1bcdaccc16c}</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">-1</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
@@ -173,16 +173,16 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/besko/Šola/asd/FOTOsinteza-main/SUDO_MEME_CRAWLER/main.py</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/besko/Šola/asd/FOTOsinteza-main/SUDO_MEME_CRAWLER/main.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/besko/Šola/asd/FOTOsinteza-main/SUDO_MEME_CRAWLER/main.py</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{28dccf97-9730-4938-8a05-d8f57923ff12}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/besko/Šola/asd/FOTOsinteza-main/SUDO_MEME_CRAWLER/main.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/besko/SUDO_MEME/SUDO_MEME_CRAWLER/main.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/besko/SUDO_MEME/SUDO_MEME_CRAWLER/main.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/besko/SUDO_MEME/SUDO_MEME_CRAWLER/main.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{6a08251c-9891-4701-b022-0b194d64e4d9}</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/besko/SUDO_MEME/SUDO_MEME_CRAWLER/main.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/besko/Šola/asd/FOTOsinteza-main/SUDO_MEME_CRAWLER</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/besko/SUDO_MEME/SUDO_MEME_CRAWLER</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

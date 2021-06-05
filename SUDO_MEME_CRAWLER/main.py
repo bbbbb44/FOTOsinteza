@@ -27,19 +27,21 @@ def is_number(s):
 
 def spider(plants):
     http = httplib2.Http()
-    for plant in plants:
+    for j in range (0,len(plants)):
         try:
-            os.mkdir(plant)
+            os.mkdir(plantsNames[j])
         except:
             print("Couldnt create directory")
-        status, response = http.request('https://garden.org/plants/group/' + plant)
-        for link in BeautifulSoup(response, 'html.parser', parse_only=SoupStrainer('li')):
-            if link.has_attr('data-thumb'):
-                print(link['data-thumb'])
-                download_web_image("https://garden.org" + link['data-thumb'].replace("-100",""), plant)
+        status, response = http.request('https://garden.org/plants/view/' + plants[j])
+        for link in BeautifulSoup(response, 'html.parser', parse_only=SoupStrainer('img')):
+            if link.has_attr('class'):
+                if(link['class'] == ['plant_thumbimage'] and link['height']=="175"):
+                    print(link)
+                    download_web_image("https://garden.org" + link['src'].replace("-175",""), plantsNames[j])
 
 
 if __name__ == "__main__":
-    plants = ["daylilies", "salvias", "sempervivum", "beets"]
+    plants = ["181473", "181474"]
+    plantsNames = ["Daylilies", "Iris"]
     x = spider(plants)
 
