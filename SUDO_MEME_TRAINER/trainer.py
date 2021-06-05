@@ -1,6 +1,5 @@
 # This Python file uses the following encoding: utf-8
 import sys
-from PySide2.QtWidgets import QApplication
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -31,7 +30,7 @@ def napolniTrainingInTestingImages(potDoDatabasea, imgWidth, imgHeight):
 if __name__ == "__main__":
     imgWidth = 400 # width slike pri učenju modela
     imgHeight = 400 # height slike pri učenju modela
-    potDoDatabasea="/home/besko/Šola/asd/FOTOsinteza-main/SUDO_MEME_CRAWLER/DATASET" # pot do dataseta ki ga želimo uporabit.
+    potDoDatabasea="/python/TRAINER/DATASET" # pot do dataseta ki ga želimo uporabit.
     # Dataset ima strukturo -DATASET
     #                           -CLASS1
     #                               -image in class1
