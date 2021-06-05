@@ -74,7 +74,7 @@ module.exports = {
 			lon : req.body.lon,
 			lat : req.body.lat, 
 			fk_user : req.session.userId,
-			fk_plant : 0,
+			fk_plant : -1,
 			path : 'images/'+req.file.filename,
         });
 
