@@ -9,25 +9,28 @@ from tensorflow.keras import datasets, layers, models
 import pymongo
 
 if __name__ == "__main__":
-    class_names = ['Plane', "Car", "Bird", "Cat", "Deer", "Dog", "Frog", "Horse", "Ship", "Truck"]
+
     model = models.load_model('image_classifier.model')
-    print(sys.argv[1])
-    image = cv2.imread(sys.argv[1], 1)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # Model je natreniran na RGB slikah
+
+    # TO JE ZA TESTIRANJE
+    # class_names = ['Dalhias', 'Daylilies', 'Iris', 'Roses', 'Salvias', 'Sempervivum']
+    # print(sys.argv[1])
+    # image = cv2.imread(sys.argv[1], 1)
+    # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # Model je natreniran na RGB slikah
 
     # Prikaz slike
     # cv2.imshow('slika', image)
     # cv2.waitKey()
     # cv2.destroyAllWindows()
 
-    prediction = model.predict(np.array([image])/255) # Normaliziram sliko
-    index = np.argmax(prediction) # Najdem index maximalno aktiviranega softmaxa
-    print(class_names[index])
+    # prediction = model.predict(np.array([image]))
+    # index = np.argmax(prediction) # Najdem index maximalno aktiviranega softmaxa
+    # print(class_names[index])
 
 
     myclient = pymongo.MongoClient("mongodb://localhost:27017")
     while(1):
-        time.sleep(1)
+        time.sleep(1) # sleepam za 1 sekundo
         mydb = myclient["test"]
         mycol = mydb["images"]
         myquery = {"fk_plants": -1}
@@ -37,7 +40,7 @@ if __name__ == "__main__":
             myquery = { "_id": var['_id'] } # Query za update_one
             image = cv2.imread(var['path'], 1) # Preberem sliko
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # Model je natreniran na RGB slikah
-            prediction = model.predict(np.array([image])/255) # Normaliziram sliko
+            prediction = model.predict(np.array([image])) # predictam
             index = np.argmax(prediction) # Najdem index maximalno aktiviranega softmaxa
             newvalues = { "$set": { "fk_plants": index.item() } }
             mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
