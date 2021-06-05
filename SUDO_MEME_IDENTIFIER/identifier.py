@@ -34,17 +34,18 @@ if __name__ == "__main__":
         time.sleep(1) # sleepam za 1 sekundo
         mydb = myclient["projekt"]
         mycol = mydb["images"]
-        myquery = {"fk_plant": -1}
+        myquery = {"fk_plant": "-1"}
         mydoc = mycol.find(myquery)
         for var in mydoc:
             print(var['_id'])
             myquery = { "_id": var['_id'] } # Query za update_one
-            image = cv2.imread(var['path'], 1) # Preberem sliko
+            imageString = "/projekt/app/public/" + var['path']
+            image = cv2.imread(imageString, 1) # Preberem sliko
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # Model je natreniran na RGB slikah
-            image_resize = cv2.resize(image, (imgHeight, imgWidth)) # Resizam sliko za prepoznavo.
+            image = cv2.resize(image, (imgHeight, imgWidth)) # Resizam sliko za prepoznavo.
             prediction = model.predict(np.array([image])) # predictam
             index = np.argmax(prediction) # Najdem index maximalno aktiviranega softmaxa
-            newvalues = { "$set": { "fk_plants": index.item() } }
+            newvalues = { "$set": { "fk_plant": str(index.item()) } }
             mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
 
 
