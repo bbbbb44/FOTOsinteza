@@ -1,4 +1,5 @@
 var ImageModel = require('../models/imageModel.js');
+var PlantsModel = require('../models/plantsModel.js');
 
 /**
  * imageController.js
@@ -43,8 +44,23 @@ module.exports = {
                     message: 'No such image'
                 });
             }
+			
+			var plantIndex = image.fk_plant;
+			PlantsModel.findOne({index : plantIndex}, function (err, plant){
+				  if (err) {
+					return res.status(500).json({
+						message: 'Error when getting plant.',
+						error: err
+					});
+				}
 
-            return res.render('image/image', {image : image});
+				if (!plant) {
+					return res.status(404).json({
+						message: 'No such plant'
+					});
+				}
+					return res.render('image/image', {image : image, plant : plant})
+			});
         });
     },
 
