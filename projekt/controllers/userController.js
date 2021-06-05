@@ -130,8 +130,10 @@ module.exports = {
 		UserModel.authenticate(req.body.username, req.body.password, function(error, user){
             if(error || !user){
                 var err = new Error("Wrong username or password");
-                err.status = 401;
-                return next(err);
+                return res.status(401).json({
+                    message: 'Wrong username or password',
+                    error: err
+                });
             } else {
                 req.session.userId = user._id;
 				req.session.username = user.username;
