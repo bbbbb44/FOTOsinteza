@@ -1,7 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import time
-from PySide2.QtWidgets import QApplication
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
@@ -10,8 +9,9 @@ import pymongo
 
 if __name__ == "__main__":
     imgWidth = 400 # width slike
+    modelName = "image_classifier.model"
     imgHeight = 400 # height slike
-    model = models.load_model('image_classifier.model')
+    model = models.load_model(modelName)
 
     # TO JE ZA TESTIRANJE
     # class_names = ['Dalhias', 'Daylilies', 'Iris', 'Roses', 'Salvias', 'Sempervivum']
