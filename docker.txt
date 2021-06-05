@@ -1,2 +1,4 @@
 docker build . -t node_projekt
 docker run -ti --name node -p 3000:3000 -p 27017:27017 -v `pwd`/SUDO_MEME_CRAWLER:/python/CRAWLER -v `pwd`/SUDO_MEME_TRAINER:/python/TRAINER -v `pwd`/SUDO_MEME_IDENTIFIER:/python/IDENTIFIER node_projekt
+sudo docker exec -ti node bash
+sudo docker start -ai node
