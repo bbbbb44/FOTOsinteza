@@ -1,3 +1,8 @@
+{{#unless session.username}}
+<b style="color:red">Za ogled vaših slike/registrirani</b>
+{{else}} {{#if err}}
+<b style="color:red">{{err}}</b>
+{{else}}
 <h1>Slika</h1><br>
 <img src="/{{image.path}}" style="width:80%; height:auto"/><br><br>
 <h6>Podrobnosti:</h6>
@@ -37,3 +42,4 @@ Lon: <text id="Lon">{{image.lon}}</text> Lat: <text id="Lat">{{image.lat}}</text
 		map.addLayer(layer);	
 	
 </script>
+{{/if}}{{/unless}}

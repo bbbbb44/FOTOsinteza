@@ -33,16 +33,11 @@ module.exports = {
 
         ImageModel.findOne({_id: id}, function (err, image) {
             if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting image.',
-                    error: err
-                });
+                return res.render('image/image', {err : err.toString()})
             }
 
             if (!image) {
-                return res.status(404).json({
-                    message: 'No such image'
-                });
+                return res.render('image/image', {err : "Slika ne obstaja"})
             }
 			
 			var plantIndex = image.fk_plant;
