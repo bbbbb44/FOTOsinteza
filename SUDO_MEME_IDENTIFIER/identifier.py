@@ -7,6 +7,12 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models
 import pymongo
 
+def resetAllFkPlants(mycol):
+        myquery = {}
+        newvalues = { "$set": { "fk_plant": "-1" } }
+        print("RESET ALL FK_PLANTS")
+        x = mycol.update_many(myquery, newvalues)
+		
 if __name__ == "__main__":
     imgWidth = 400 # width slike
     modelName = "image_classifier.model"
@@ -30,10 +36,15 @@ if __name__ == "__main__":
 
 
     myclient = pymongo.MongoClient("mongodb://localhost:27017")
+    mydb = myclient["projekt"]
+    mycol = mydb["images"]
+
+    # resetAllFkPlants(mycol)
+    # SAMO ĆE ŽELIŠ RESET-AT VSE INDEXE
+
+
     while(1):
         time.sleep(1) # sleepam za 1 sekundo
-        mydb = myclient["projekt"]
-        mycol = mydb["images"]
         myquery = {"fk_plant": "-1"}
         mydoc = mycol.find(myquery)
         for var in mydoc:
