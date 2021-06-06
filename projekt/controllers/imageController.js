@@ -55,6 +55,12 @@ module.exports = {
      * imageController.create()
      */
     create: function (req, res) {
+		var checked = "0";
+		var check = req.body.metaPodatki;
+		if(check){
+			var checked = "1";
+		}
+		
         var image = new ImageModel({
 			description : req.body.description,
 			datetime : new Date(),
@@ -62,6 +68,7 @@ module.exports = {
 			lat : req.body.lat, 
 			fk_user : req.session.userId,
 			fk_plant : -1,
+			metaPodatki : checked,
 			path : 'images/'+req.file.filename,
         });
 

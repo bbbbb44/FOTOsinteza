@@ -6,6 +6,7 @@ var imageSchema = new Schema({
 	'datetime' : String,
 	'lat' : Number,
 	'lon' : Number, 
+	'metaPodatki' : String,
 	'fk_user' : String,
 	'fk_plant' : String,
 	'path' : String
