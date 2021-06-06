@@ -27,6 +27,6 @@ router.put('/:id', imageController.update);
 /*
  * DELETE
  */
-router.delete('/:id', imageController.remove);
+router.post('/delete/:id', imageController.remove);
 
 module.exports = router;

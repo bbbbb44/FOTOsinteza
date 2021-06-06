@@ -9,7 +9,10 @@
 <b>Rastlina: </b>{{plant.name}}<br>
 <b>Opis rastline: </b>{{plant.description}}<br>
 <b>Opis: </b>{{image.description}}<br>
-<b>Datum objave: </b>{{image.datetime}}<br><br>
+<b>Datum objave: </b>{{image.datetime}}<br>
+<form action="/images/delete/{{image._id}}" method="post" enctype="multipart/form-data" id="imageForm">
+	  <input type="submit" value="Izbrisi sliko">
+</form><br><br>
 Lon: <text id="Lon">{{image.lon}}</text> Lat: <text id="Lat">{{image.lat}}</text><br>
 <div id="map" class="map"></div>
 <script type="text/javascript">

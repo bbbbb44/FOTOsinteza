@@ -42,19 +42,11 @@ module.exports = {
 			
 			var plantIndex = image.fk_plant;
 			PlantsModel.findOne({index : plantIndex}, function (err, plant){
-				  if (err) {
-					return res.status(500).json({
-						message: 'Error when getting plant.',
-						error: err
-					});
-				}
-
-				if (!plant) {
-					return res.status(404).json({
-						message: 'No such plant'
-					});
-				}
+				 if (err) {
+					return res.render('image/image', {err : "Slika ne obstaja"})
+				} else {
 					return res.render('image/image', {image : image, plant : plant})
+				}
 			});
         });
     },
@@ -136,7 +128,7 @@ module.exports = {
                 });
             }
 
-            return res.status(204).json();
+            return res.render('image/uspesnoIzbrisano');
         });
     },
 	
