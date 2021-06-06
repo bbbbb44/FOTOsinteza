@@ -1,7 +1,7 @@
 <br>
 {{#if err}}
 <b style="color:red">{{err}}</b>
-{{else session.username}}
+{{else}} {{#if session.username}}
 <a href="http://localhost:3000/images/dodaj" class="btn btn-primary btn-sm">Dodaj novo sliko</a>
 <br><br>
 <h2>Vaše slike:</h2>
@@ -18,4 +18,4 @@
 
 {{else}}
 <b style="color:red">Za ogled vaših slik rabite biti prijavljeni/registrirani</b>
-{{/if}}
+{{/if}}{{/if}}
