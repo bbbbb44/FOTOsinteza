@@ -76,17 +76,18 @@ if __name__ == "__main__":
                 geoTags = {}
                 for (id, tag) in TAGS.items():
                     if tag == 'GPSInfo':
-                        if id not in exif:
-                            raise ValueError("No EXIF geotagging found")
-
                         for (key, val) in GPSTAGS.items():
                             if key in exif[id]:
                                 geoTags[val] = exif[id][key]
                 latitude = (geoTags['GPSLatitude'])[0] + ((geoTags['GPSLatitude'])[1] / 60.0) + ((geoTags['GPSLatitude'])[2] / 3600.0)
                 longitude = (geoTags['GPSLongitude'])[0] + ((geoTags['GPSLongitude'])[1] / 60.0) + ((geoTags['GPSLongitude'])[2] / 3600.0)
-                newvalues = { "$set": { "metaPodatki": "0" }}
+                if geoTags['GPSLatitudeRef'] == 'S':
+                    latitude = -latitude
+                if geoTags['GPSLongitudeRef'] == 'W':
+                    longitude = - longitude
+                newvalues = { "$set": { "metaPodatki": "0", "lat": longitude,"lon": latitude}  }
                 print(latitude)
-            except TypeError as e:
+            except Exception as e:
                 print("exception: ", e)
                 newvalues = { "$set": { "metaPodatki": "-1" } }
             mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
