@@ -12,7 +12,8 @@ module.exports = {
      * imageController.list()
      */
     list: function (req, res) {
-        ImageModel.find({fk_user : req.session.userId}, function (err, images) {
+		console.log("heeyooo");
+        ImageModel.find({fk_user : req.session.userId, uploaded : "1"}, function (err, images) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting image.',
@@ -70,6 +71,7 @@ module.exports = {
 			fk_plant : -1,
 			metaPodatki : checked,
 			path : 'images/'+req.file.filename,
+			uploaded : "1"
         });
 
         image.save(function (err, image) {

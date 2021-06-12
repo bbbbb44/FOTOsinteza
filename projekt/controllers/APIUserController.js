@@ -131,7 +131,7 @@ module.exports = {
             if(error || !user){
                 var err = new Error("Wrong username or password");
                 err.status = 401;
-                return next(err);
+                return res.json(err);
             } else {
                 req.session.userId = user._id;
 				req.session.username = user.username;

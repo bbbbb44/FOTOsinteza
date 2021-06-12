@@ -9,7 +9,8 @@ var imageSchema = new Schema({
 	'metaPodatki' : String,
 	'fk_user' : String,
 	'fk_plant' : String,
-	'path' : String
+	'path' : String,
+	'uploaded' : String
 });
 
 module.exports = mongoose.model('image', imageSchema);

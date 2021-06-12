@@ -73,15 +73,17 @@ module.exports = {
 		if(check){
 			var checked = "1";
 		}
+		
         var image = new ImageModel({
 			description : req.body.description,
 			datetime : new Date(),
 			lon : req.body.lon,
 			lat : req.body.lat, 
-			fk_user : req.session.userId,
+			fk_user : req.body.userId,
 			fk_plant : -1,
 			metaPodatki : checked, 
-			path : 'images/'+req.file.filename,
+			path : req.body.slika,
+			uploaded : "0"
         });
 
         image.save(function (err, image) {
@@ -94,7 +96,6 @@ module.exports = {
 			return res.json(image);
         });
     },
-
     /**
      * imageController.update()
      */
