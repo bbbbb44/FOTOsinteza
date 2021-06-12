@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import time
+import base64
 import numpy as np
 import cv2
 import matplotlib.pyplot as pltž
@@ -52,8 +53,10 @@ if __name__ == "__main__":
         time.sleep(1) # sleepam za 1 sekundo
         myquery1 = {"fk_plant": "-1"}
         myquery2 = {"metaPodatki": "1"}
+        myquery3 = {"uploaded": "0"}
         mydoc1 = mycol.find(myquery1)
         mydoc2 = mycol.find(myquery2)
+	mydoc3 = mycol.find(myquery3)
         for var in mydoc1: # RAZPOZAVANJE RASTLIN
             print(var['_id'])
             myquery = { "_id": var['_id'] } # Query za update_one
@@ -91,3 +94,16 @@ if __name__ == "__main__":
                 print("exception: ", e)
                 newvalues = { "$set": { "metaPodatki": "-1" } }
             mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
+
+        for var in mydoc3: # UPLOADANJE
+            myquery = { "_id": var['_id'] } # Query za update_one
+	    id = var['_id']
+            print(id)
+	    data =(var['path'])
+	    newPath = 'images/' + id
+	    pathDoSlike = '/projekt/app/public/' + id
+	    with open(pathDoSlike, 'wb') as f:
+        	f.write(data)
+            newvalues = { "$set": { "uploaded": "1", "path": newPath} }
+            mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
+
