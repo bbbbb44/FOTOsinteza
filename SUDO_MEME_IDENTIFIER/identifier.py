@@ -97,7 +97,7 @@ if __name__ == "__main__":
             except Exception as e:
                 print("exception: ", e)
                 newvalues = { "$set": { "metaPodatki": "-1" } }
-            mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
+            mycol.update_one(myquery, newvalues) # update
 
         for var in mydoc3: # UPLOADANJE
             myquery = { "_id": var['_id'] } # Query za update_one
@@ -105,9 +105,9 @@ if __name__ == "__main__":
             print(id)
             data =(var['path'])
             imgdata = base64.b64decode(data)
-            newPath = 'images/' + str(id)
-            pathDoSlike = '/projekt/app/public/images/' + str(id)
+            newPath = 'images/' + str(id) + 'u'
+            pathDoSlike = '/projekt/app/public/images/' + str(id) + 'u'
             with open(pathDoSlike, 'wb') as f:
                 f.write(imgdata) 
             newvalues = { "$set": { "uploaded": "1", "path": newPath} }
-            mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
+            mycol.update_one(myquery, newvalues) # update
