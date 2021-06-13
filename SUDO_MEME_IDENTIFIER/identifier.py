@@ -1,28 +1,17 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import time
-import base64
+from PySide2.QtWidgets import QApplication
 import numpy as np
 import cv2
-import matplotlib.pyplot as pltž
-import os
+import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models
 import pymongo
-from PIL import Image, ExifTags
-from PIL.ExifTags import TAGS
-from PIL.ExifTags import GPSTAGS
 
-def resetAllFkPlants(mycol):
-        myquery = {}
-        newvalues = { "$set": { "fk_plant": "-1" } }
-        print("RESET ALL FK_PLANTS")
-        x = mycol.update_many(myquery, newvalues)
-		
 if __name__ == "__main__":
     imgWidth = 400 # width slike
-    modelName = "image_classifier.model"
     imgHeight = 400 # height slike
-    model = models.load_model(modelName)
+    model = models.load_model('image_classifier.model')
 
     # TO JE ZA TESTIRANJE
     # class_names = ['Dalhias', 'Daylilies', 'Iris', 'Roses', 'Salvias', 'Sempervivum']
@@ -40,70 +29,22 @@ if __name__ == "__main__":
     # print(class_names[index])
 
 
-
     myclient = pymongo.MongoClient("mongodb://localhost:27017")
-    mydb = myclient["projekt"]
-    mycol = mydb["images"]
-
-    # resetAllFkPlants(mycol)
-    # SAMO ĆE ŽELIŠ RESET-AT VSE INDEXE
-
-    lokacijaSlik = "/projekt/app/public/"
     while(1):
         time.sleep(1) # sleepam za 1 sekundo
-        myquery1 = {"fk_plant": "-1"}
-        myquery2 = {"metaPodatki": "1"}
-        myquery3 = {"uploaded": "0"}
-        mydoc1 = mycol.find(myquery1)
-        mydoc2 = mycol.find(myquery2)
-	mydoc3 = mycol.find(myquery3)
-        for var in mydoc1: # RAZPOZAVANJE RASTLIN
+        mydb = myclient["projekt"]
+        mycol = mydb["images"]
+        myquery = {"fk_plant": -1}
+        mydoc = mycol.find(myquery)
+        for var in mydoc:
             print(var['_id'])
             myquery = { "_id": var['_id'] } # Query za update_one
-            imageString = lokacijaSlik + var['path']
-            image = cv2.imread(imageString, 1) # Preberem sliko
+            image = cv2.imread(var['path'], 1) # Preberem sliko
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # Model je natreniran na RGB slikah
-            image = cv2.resize(image, (imgHeight, imgWidth)) # Resizam sliko za prepoznavo.
+            image_resize = cv2.resize(image, (imgHeight, imgWidth)) # Resizam sliko za prepoznavo.
             prediction = model.predict(np.array([image])) # predictam
             index = np.argmax(prediction) # Najdem index maximalno aktiviranega softmaxa
-            newvalues = { "$set": { "fk_plant": str(index.item()) } }
+            newvalues = { "$set": { "fk_plants": index.item() } }
             mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
 
-        for var in mydoc2: # GEO LOKACIJA
-            print(var['_id'])
-            myquery = { "_id": var['_id'] } # Query za update_one
-            imageString = lokacijaSlik + var['path']
-            try:
-                img = Image.open(imageString)
-                exif = img._getexif()
-                geoTags = {}
-                for (id, tag) in TAGS.items():
-                    if tag == 'GPSInfo':
-                        for (key, val) in GPSTAGS.items():
-                            if key in exif[id]:
-                                geoTags[val] = exif[id][key]
-                latitude = (geoTags['GPSLatitude'])[0] + ((geoTags['GPSLatitude'])[1] / 60.0) + ((geoTags['GPSLatitude'])[2] / 3600.0)
-                longitude = (geoTags['GPSLongitude'])[0] + ((geoTags['GPSLongitude'])[1] / 60.0) + ((geoTags['GPSLongitude'])[2] / 3600.0)
-                if geoTags['GPSLatitudeRef'] == 'S':
-                    latitude = -latitude
-                if geoTags['GPSLongitudeRef'] == 'W':
-                    longitude = - longitude
-                newvalues = { "$set": { "metaPodatki": "0", "lat": longitude,"lon": latitude}  }
-                print(latitude)
-            except Exception as e:
-                print("exception: ", e)
-                newvalues = { "$set": { "metaPodatki": "-1" } }
-            mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
-
-        for var in mydoc3: # UPLOADANJE
-            myquery = { "_id": var['_id'] } # Query za update_one
-	    id = var['_id']
-            print(id)
-	    data =(var['path'])
-	    newPath = 'images/' + id
-	    pathDoSlike = '/projekt/app/public/' + id
-	    with open(pathDoSlike, 'wb') as f:
-        	f.write(data)
-            newvalues = { "$set": { "uploaded": "1", "path": newPath} }
-            mycol.update_one(myquery, newvalues) # Updateam image z prepoznanim fk_plants
 
